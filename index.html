@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Upload Test</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; frame-ancestors 'self'; form-action *">  <body>
+    <form
+      id="form_el"
+      class="new-project"
+      action="http://127.0.0.1:5000/post/p0st"
+      method="POST"
+      enctype="multipart/form-data"
+    >
+      <label for="file">Select your image:</label>
+      <input
+        type="file"
+        multiple="multiple"
+        accept="image/*"
+        name="uploadedImages"
+        id="file"
+      />
+      <span class="hint">Supported files: jpg, jpeg, png.</span>
+      <button type="submit">upload</button>
+    </form>
+    <script async>
+      form_el.addEventListener('submit', async function (e) {
+          const files = e.target.uploadedImages.files;
+          if (files.length != 0) {
+              for (const single_file of files) {
+                  data.append('attachments', single_file)
+              }
+          }
+      });
+
+      const submit_data_fetch = await fetch('http://127.0.0.1:5000/post/p0st', {
+          method: 'POST',
+          body: data
+      });
+      console.log()
+    </script>
+  </body>
+</html>
